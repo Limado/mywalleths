@@ -3,10 +3,11 @@ import { HttpException, HttpStatus } from "@nestjs/common";
 import axios from "axios";
 class Etherscan {
 
-    apiKey: string = 'NSZCD6S4TKVWRS13PMQFMVTNP6H7NAGHUY';
-    apiUrl: string = 'https://api.etherscan.io/api';
-    constructor() {
-
+    apiKey: string;
+    apiUrl: string;
+    constructor(key, url) {
+        this.apiKey = key;
+        this.apiUrl = url;
     }
     public async getBalance(address: string) {
         return await axios.get(`${this.apiUrl}?module=account&action=balance&address=${address}&tag=latest&apikey=${this.apiKey}`)
@@ -43,5 +44,4 @@ class Etherscan {
     }
 }
 
-const ETHScan = new Etherscan();
-export { ETHScan };
+export { Etherscan };

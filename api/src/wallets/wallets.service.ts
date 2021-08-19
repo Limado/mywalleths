@@ -3,20 +3,22 @@ import { ConsoleLogger, HttpException, HttpStatus, Injectable } from '@nestjs/co
 import { InjectModel } from '@nestjs/mongoose';
 import { Wallet, WalletDocument } from './schemas/wallet.schema';
 import { CreateWalletDto } from './dto/create-wallet.dto';
-import { ETHScan } from 'src/etherscan/etherscan';
+import { Etherscan } from 'src/etherscan/etherscan';
 
 @Injectable()
 export class WalletsService {
-    constructor(@InjectModel(Wallet.name) private walletModel: Model<WalletDocument>) { }
+    ETHScan: Etherscan
+    constructor(@InjectModel(Wallet.name) private walletModel: Model<WalletDocument>) {
+        this.ETHScan = new Etherscan(process.env.ETH_API_KEY, process.env.ETH_API_URL);
+     }
 
     async create(createWalletDto: CreateWalletDto): Promise<Wallet> {
-        console.log(createWalletDto)
         const createdWallet = new this.walletModel(createWalletDto);
 
         console.log(`Getting from Etherscan.io`);
-        createdWallet.balance = await ETHScan.getBalance(createdWallet.address);
+        createdWallet.balance = await this.ETHScan.getBalance(createdWallet.address);
         createdWallet.lastConnection = new Date().getTime().toString();
-        createdWallet.firstTransactionTS = await ETHScan.firstTransactionTS(createdWallet.address);
+        createdWallet.firstTransactionTS = await this.ETHScan.firstTransactionTS(createdWallet.address);
         createdWallet.isFavourite = false;
         return await createdWallet.save();
     }
@@ -29,7 +31,7 @@ export class WalletsService {
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
             let foundWallet = await this.walletModel.findById(id);
             if (!foundWallet) return this.emptyWallet();
-            foundWallet.balance = await ETHScan.getBalance(foundWallet.address);
+            foundWallet.balance = await this.ETHScan.getBalance(foundWallet.address);
             foundWallet.lastConnection = new Date().getTime().toString();
             return await foundWallet;
         }

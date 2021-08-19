@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [WalletsModule,
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true }),
     MongooseModule.forRoot(process.env.DATABASE_CONECTION),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, process.env.CLIENT_PATH),
