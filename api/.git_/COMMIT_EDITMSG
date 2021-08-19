@@ -1,0 +1,41 @@
+First commit
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#	new file:   .env
+#	new file:   .eslintrc.js
+#	new file:   .gitignore
+#	new file:   .prettierrc
+#	new file:   .vscode/launch.json
+#	new file:   README.md
+#	new file:   development.env
+#	new file:   nest-cli.json
+#	new file:   package-lock.json
+#	new file:   package.json
+#	new file:   production.env
+#	new file:   src/app.controller.spec.ts
+#	new file:   src/app.controller.ts
+#	new file:   src/app.module.ts
+#	new file:   src/app.service.ts
+#	new file:   src/etherscan/etherscan.ts
+#	new file:   src/filters/exception.interface.ts
+#	new file:   src/filters/http-exception.filters.ts
+#	new file:   src/filters/mongo-error.filter.ts
+#	new file:   src/main.ts
+#	new file:   src/wallets/dto/create-wallet.dto.ts
+#	new file:   src/wallets/schemas/wallet.schema.ts
+#	new file:   src/wallets/wallets.controller.spec.ts
+#	new file:   src/wallets/wallets.controller.ts
+#	new file:   src/wallets/wallets.module.ts
+#	new file:   src/wallets/wallets.service.spec.ts
+#	new file:   src/wallets/wallets.service.ts
+#	new file:   test/app.e2e-spec.ts
+#	new file:   test/jest-e2e.json
+#	new file:   tsconfig.build.json
+#	new file:   tsconfig.json
+#
