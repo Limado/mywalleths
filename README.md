@@ -23,3 +23,9 @@ npm run build
 ```
 cd api && npm run start:prod
 ```
+
+
+### Run docker container
+```
+cd MyWalleths && docker-compose up
+```
