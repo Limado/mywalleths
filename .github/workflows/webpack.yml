@@ -1,0 +1,43 @@
+name: Build and Release on Development Push
+
+on:
+  push:
+    branches: [ "development" ]
+      
+  pull_request:
+    branches:  [ "development" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.12]
+
+    steps:
+    # 1. Configurar el repositorio
+    - name: Check out the code
+      uses: actions/checkout@v4
+    # 2. Instalar Node.js
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    # 2. Instalar las dependencias
+    - name: Install api dependencies
+      run: cd api && npm install
+    # 3. Compilar el proyecto con Webpack
+    - name: Build release
+      run: cd api && npm run build
+    # 4. Crear un zip del build
+    - name: Compress build artifacts
+      run: zip -r build.zip ./api/dist
+
+    # 5. Subir el build a una Release (basado en el último commit)
+    - name: Create Release and Upload Artifact
+      uses: ncipollo/release-action@v1
+      with:
+        tag: development-build-${{ github.run_id }}
+        name: Development Build - ${{ github.run_id }}
+        files: build.zip
