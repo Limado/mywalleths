@@ -1,6 +1,7 @@
 name: Build and Release on Development Push
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "development" ]
       
