@@ -35,7 +35,7 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
+# developments
 $ npm run start
 
 # watch mode
