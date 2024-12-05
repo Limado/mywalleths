@@ -41,4 +41,4 @@ jobs:
       with:
         tag: development-build-${{ github.run_id }}
         name: Development Build - ${{ github.run_id }}
-        files: build.zip
+        artifacts: build.zip
