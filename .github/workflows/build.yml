@@ -33,7 +33,7 @@ jobs:
       run: cd api && npm run build
     # 4. Crear un zip del build
     - name: Compress build artifacts
-      run: zip -r build.zip ./api/dist
+      run: cd api/dist && zip -r ../../build.zip . && cd ../..
 
     # 5. Subir el build a una Release (basado en el último commit)
     - name: Create Release and Upload Artifact
