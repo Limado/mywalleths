@@ -1,4 +1,4 @@
-## Project setup
+## Project setups
 ```
 Api NestJs
 Client VueJs
